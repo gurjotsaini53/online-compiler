@@ -1,11 +1,22 @@
 import { useState } from "react";
+import axios from "axios";
 
 function Main() {
   const [code, setCode] = useState("");
+  const [output, setOutput] = useState("");
+  const handleSubmit = async () => {
+    const payLoad = {
+      language: "cpp",
+      code,
+    };
 
-  const handleSubmit = () => {
-    console.log(code);
+    const { data } = await axios.post("http://localhost:3000/run", payLoad);
+
+    setOutput(data.output);
+
+    // console.log(output);
   };
+
   return (
     <>
       <div className="main">
@@ -22,6 +33,8 @@ function Main() {
         <br />
 
         <button onClick={handleSubmit}>Submit</button>
+
+        <p>{output}</p>
       </div>
     </>
   );

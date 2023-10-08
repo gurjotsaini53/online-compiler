@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const { generateFile } = require("./generateFile");
 const { executeCpp } = require("./executeCpp");
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -26,5 +28,3 @@ app.post("/run", async (req, res) => {
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
-
-
